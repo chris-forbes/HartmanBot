@@ -1,0 +1,39 @@
+version : "3"
+
+
+
+vars:
+  BUILD_NAME: SamM-Bot.exe
+
+env:
+  ENV: local
+
+dotenv: ['.env', '{{.ENV}}/.env', '{{.HOME}}/.env']
+
+tasks: 
+  build:
+    label: 'Building executable {{.BUILD_NAME}}'
+    desc: build the app
+    cmds:
+    - go build -o build/{{.BUILD_NAME}}
+    # - mkdir -p build/resources
+    # - cp -R resources build/resources
+  
+  run:
+    label: 'Running bot from main'
+    desc: run the bot
+    cmds:
+    - go run main.go -t {{.BOT_TOKEN}}
+    silent: true
+  
+  bot:
+    label: 'Running exe file {{.BUILD_NAME}}'
+    desc: run the built exe
+    cmds:
+    - ./build/{{.BUILD_NAME}} -t {{.BOT_TOKEN}}
+    silent: true
+  
+  clean:
+    desc: clean up old builds
+    cmds:
+    - rm ./build/{{.BUILD_NAME}}
