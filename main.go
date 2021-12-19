@@ -144,6 +144,17 @@ func messageCreate(session *discordgo.Session, discordMessage *discordgo.Message
 		return
 	}
 
+	if strings.HasPrefix(discordMessage.Content, "!help") {
+		help_message := `
+> Gunnery Sgt. Hartman Bot 
+> version: 0.0.3-pre-alpha
+> Commands:		
+> 	!help - This message
+> 	!sarge <text> - Sarge the bot with the text
+> 	!meme - receive a random meme`
+		session.ChannelMessageSend(discordMessage.ChannelID, help_message)
+	}
+
 	if strings.HasPrefix(discordMessage.Content, "!meme") {
 		randomMeme := service.GetRandomMeme()
 		_, err := session.ChannelMessageSend(discordMessage.ChannelID, randomMeme)
