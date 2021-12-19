@@ -177,6 +177,6 @@ I'll P.T. you until your assholes are sucking buttermilk.
 Whats that twinkle-toes you wanted to tell @everyone: 
 
 %s`, discordMessage.Content)
-		sendSergentMesage(session, responseMessage, discordMessage)
+		sendMessageWithLocalFileResource(session, discordMessage, responseMessage, "resources/Sgt_Hartman.png")
 	}
 }
